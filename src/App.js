@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import data from "./data.js";
+import { useState } from "react";
 function App() {
+  const [allUsers, setAllUsers] = useState(data);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <div className="container">
+          <h2>{allUsers.length} birthdays today</h2>
+          {allUsers.map((person) => {
+            const { age, image, name, id } = person;
+            return (
+              <article className="person">
+                <img src={image} width="150px" />
+                <div>
+                  <h4>{name}</h4>
+                  <p>{age} years</p>
+                </div>
+              </article>
+            );
+          })}
+          <button onClick={() => setAllUsers([])}>Clear All</button>
+        </div>
+      </main>
     </div>
   );
 }
